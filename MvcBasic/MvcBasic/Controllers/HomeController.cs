@@ -26,5 +26,11 @@ namespace MvcBasic.Controllers
 
             return View();
         }
+
+        [ChildActionOnly]
+        public ActionResult CurrentTime()
+        {
+            return PartialView("_CurrentTimePartial", DateTime.Now);
+        }
     }
 }

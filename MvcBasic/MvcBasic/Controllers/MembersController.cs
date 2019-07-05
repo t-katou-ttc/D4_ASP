@@ -13,7 +13,7 @@ namespace MvcBasic.Controllers
     public class MembersController : Controller
     {
         private MvcBasicContext db = new MvcBasicContext();
-
+        
         // GET: Members
         public ActionResult Index()
         {
@@ -46,6 +46,7 @@ namespace MvcBasic.Controllers
         // 詳細については、http://go.microsoft.com/fwlink/?LinkId=317598 を参照してください。
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // オーバーポスティング攻撃を防ぐためにBindを使っている
         public ActionResult Create([Bind(Include = "Id,Name,Email,Birth,Married,Memo")] Member member)
         {
             if (ModelState.IsValid)
@@ -125,6 +126,21 @@ namespace MvcBasic.Controllers
                 db.Dispose();  // 接続を開放
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Search(string name)
+        {
+            var articles = from member in db.Members select member;
+            if (!string.IsNullOrEmpty(name))
+            {
+                articles = articles.Where(member => member.Name.Contains(name));
+            }
+            // OrderByは破壊的じゃない並び替え
+            articles = articles.OrderByDescending(member => member.Id);
+
+            // Distinct()：重複のないデータを取得する。破壊的じゃない。すべて一致していないと効果がない
+            articles = articles.Distinct();
+            return View(articles);
         }
     }
 }

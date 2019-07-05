@@ -15,6 +15,11 @@ namespace MvcBasic
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer<MvcBasicContext>(new MvcBasicInitializer());
+
+            // 以下にビューエンジンの無効化を追加
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new WebFormViewEngine());
+            ViewEngines.Engines.Add(new RazorViewEngine());
         }
     }
 }

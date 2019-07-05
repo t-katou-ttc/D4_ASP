@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BeginController.cs" />
+    <Compile Include="Controllers\BindController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
@@ -283,6 +284,11 @@
     <Content Include="Views\Members\Index.cshtml" />
     <Content Include="Views\Shared\_ThisLayout.cshtml" />
     <Content Include="Views\Shared\_MemberPartial.cshtml" />
+    <Content Include="Views\Shared\_CurrentTimePartial.cshtml" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Members\Search.cshtml" />
+    <Content Include="Views\Bind\Upload.cshtml" />
+    <None Include="Views\Shared\_Layout.master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
